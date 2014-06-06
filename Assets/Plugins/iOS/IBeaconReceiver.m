@@ -25,8 +25,6 @@
     else
         [self.beaconRegions addObject:tempRegion];
     [self.locationManager startMonitoringForRegion:tempRegion];
-    [self.locationManager startRangingBeaconsInRegion:tempRegion];
-    
 }
 
 
@@ -59,7 +57,6 @@
 }
 
 - (void) locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region {
-    NSLog(@"Monitor started.");
     [self.locationManager requestStateForRegion:region];
 }
 

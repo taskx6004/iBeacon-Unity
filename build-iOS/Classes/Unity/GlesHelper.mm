@@ -60,7 +60,7 @@ void CreateSystemRenderingSurface(UnityRenderingSurface* surface)
 										];
 
 
-	surface->colorFormat = surface->use32bitColor ? GL_RGBA8_OES : GL_RGB565;
+	surface->colorFormat = surface->use32bitColor ? GL_RGBA : GL_RGBA;
 
 	GLES_CHK(glGenRenderbuffers(1, &surface->systemColorRB));
 	GLES_CHK(glBindRenderbuffer(GL_RENDERBUFFER, surface->systemColorRB));
@@ -120,7 +120,7 @@ void CreateRenderingSurface(UnityRenderingSurface* surface)
 		GLES_CHK(glGenFramebuffers(1, &surface->msaaFB));
 		GLES_CHK(glBindFramebuffer(GL_FRAMEBUFFER, surface->msaaFB));
 
-		GLES_CHK(glRenderbufferStorageMultisampleAPPLE(GL_RENDERBUFFER, surface->msaaSamples, surface->colorFormat, surface->targetW, surface->targetH));
+		GLES_CHK(glRenderbufferStorageMultisample(GL_RENDERBUFFER, surface->msaaSamples, surface->colorFormat, surface->targetW, surface->targetH));
 		GLES_CHK(glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, surface->msaaColorRB));
 	}
 }
@@ -130,9 +130,9 @@ void CreateSharedDepthbuffer(UnityRenderingSurface* surface)
 	EAGLContextSetCurrentAutoRestore autorestore(surface->context);
 	DestroySharedDepthbuffer(surface);
 
-	surface->depthFormat = surface->use24bitDepth ? GL_DEPTH_COMPONENT24_OES : GL_DEPTH_COMPONENT16;
+	surface->depthFormat = surface->use24bitDepth ? GL_DEPTH_COMPONENT24 : GL_DEPTH_COMPONENT16;
 	if(_supportsPackedStencil && surface->use24bitDepth)
-		surface->depthFormat = GL_DEPTH24_STENCIL8_OES;
+		surface->depthFormat = GL_DEPTH24_STENCIL8;
 
 	GLES_CHK(glGenRenderbuffers(1, &surface->depthRB));
 	GLES_CHK(glBindRenderbuffer(GL_RENDERBUFFER, surface->depthRB));
@@ -140,7 +140,7 @@ void CreateSharedDepthbuffer(UnityRenderingSurface* surface)
 	bool needMSAA = _supportsMSAA && (surface->msaaSamples > 1);
 
 	if(needMSAA)
-		GLES_CHK(glRenderbufferStorageMultisampleAPPLE(GL_RENDERBUFFER, surface->msaaSamples, surface->depthFormat, surface->targetW, surface->targetH));
+		GLES_CHK(glRenderbufferStorageMultisample(GL_RENDERBUFFER, surface->msaaSamples, surface->depthFormat, surface->targetW, surface->targetH));
 
 	if(!needMSAA)
 		GLES_CHK(glRenderbufferStorage(GL_RENDERBUFFER, surface->depthFormat, surface->targetW, surface->targetH));

@@ -47,7 +47,7 @@ int CMVideoSampling_SampleBuffer(CMVideoSampling* sampling, void* buffer, int w,
             CFRelease(sampling->cvTextureCacheTexture);
             FlushCVTextureCache(sampling->cvTextureCache);
         }
-        sampling->cvTextureCacheTexture = CreateTextureFromCVTextureCache(sampling->cvTextureCache, cvImageBuffer, w, h, GL_BGRA_EXT, GL_RGBA, GL_UNSIGNED_BYTE);
+        sampling->cvTextureCacheTexture = CreateTextureFromCVTextureCache(sampling->cvTextureCache, cvImageBuffer, w, h, GL_RGBA, GL_RGBA, GL_UNSIGNED_BYTE);
         if(sampling->cvTextureCacheTexture)
             retTex = GetGLTextureFromCVTextureCache(sampling->cvTextureCacheTexture);
     }
@@ -60,7 +60,7 @@ int CMVideoSampling_SampleBuffer(CMVideoSampling* sampling, void* buffer, int w,
 
         // TODO: provide unity interface?
         GLES_CHK(glBindTexture(GL_TEXTURE_2D, retTex));
-        GLES_CHK(glTexImage2D (GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_BGRA_EXT, GL_UNSIGNED_BYTE, texData));
+        GLES_CHK(glTexImage2D (GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData));
 
         CVPixelBufferUnlockBaseAddress(cvImageBuffer,0);
 

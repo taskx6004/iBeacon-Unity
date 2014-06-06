@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>ibeacon-test-jlk-1</string>
+	<string>ibeacon-test-jlk</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFiles</key>
@@ -19,7 +19,7 @@
 		<string>AppIcon76x76~ipad.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>com.clover.${PRODUCT_NAME}Base</string>
+	<string>${PRODUCT_NAME}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -37,8 +37,6 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>bluetooth-central</string>
-		<string>bluetooth-peripheral</string>
-		<string>fetch</string>
 		<string>location</string>
 	</array>
 	<key>UIInterfaceOrientation</key>
